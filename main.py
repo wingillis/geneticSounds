@@ -29,7 +29,7 @@ import argparse, time, os
 outputFolder = 'outputSound'
 inputFolder = 'inputMusic'
 
-
+##################################################
 
 parser = argparse.ArgumentParser(
     description='Creates a sound from a genetic algorithm using a reference')
@@ -38,3 +38,8 @@ parser.add_argument('file', help='the input file for sound reference (.mp3 or .w
 parser.add_argument('-t', help='time span that the sound spans in music file')
 
 args = parser.parse_args()
+
+# This is how you get the data from args
+# print(args.file)
+# print(args.t)
+
