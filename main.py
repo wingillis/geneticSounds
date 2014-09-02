@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Winthrop Gillis 9/1/2014
 # Music genetic algorithms
 # Goal of the project: To be able to evolve a sound through 
@@ -11,13 +13,17 @@
 # a folder will be located in the program project folder
 # that the user must put all input songs in before referencing
 # in program
+# this main file will handle all the abstracted stuff, and will be the 
+# handler for general functionality, like the evolution steps
 
-# argparse is used to add arguments to the program
 
 ##################################################
 # Import statements
 ##################################################
-import argparse, time, os
+
+# argparse is used for command line interfacing
+import argparse 
+import time, os, sys
 
 
 
@@ -28,6 +34,8 @@ import argparse, time, os
 ##################################################
 outputFolder = 'outputSound'
 inputFolder = 'inputMusic'
+if sys.platform == 'linux':
+    outputFolder = '/media/odroid/UNTITLED/outputSound'
 
 ##################################################
 
