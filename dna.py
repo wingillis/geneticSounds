@@ -1,6 +1,9 @@
 # this file contains the representation of the sound information
 # including how the 'DNA' will be merged and produce new members
 
+# to handle numerical applications, import numpy
+import numpy
+
 class SoundDna:
     
     # name parameters and initialize them
@@ -37,3 +40,13 @@ class SoundDna:
     def getDna(self):
 
         # return dna in a list format to be applied successively
+        return
+
+    def CalculateFitness(self, reference):
+        '''Calculates the fitness of the current organism based on the
+        waveform of the reference (also a SoundDna object). Fitness is
+        calculated by first normalizing the input sound and dividing the
+        waveform by that number. Then the average distance between the waveforms
+        across all frequencies will be calculated.'''
+
+        return
