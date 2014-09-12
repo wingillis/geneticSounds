@@ -1,28 +1,45 @@
 # this file contains the representation of the sound information
 # including how the 'DNA' will be merged and produce new members
 
+import numpy as np
+import scipy as sp
+import random
+
 class SoundDna:
     
     # name parameters and initialize them
-    # genes will be a dictionary containing all the parameters for each individual
+    # genes will be a list containing a dictionary of all the parameters for each individual
     # gene, i.e. amplitude, start time, stop time, function used, frequency
     # each will be acessible by an index number
-    self.genes = {}
+    self.genes = []
+
+    # contains the property for how many genes are present in the DNA
+    self.geneCount = 0
     # amplitude of the sound at any given time
-    self.amplitude = 0
+    self.maxAmplitude = 500000
+
+    # bounds of the frequency ranges
+    self.minFrequency = 10
+    self.maxFrequency = 20000
     # functions that can be used to calculate a sound
-    self.functions = []
+    self.functions = [np.sin, np.cos]
     def __init__(self, genes=None):
         # TODO: figure out what parameters to add to init
         
         # populate the gene array with initial conditions if genes weren't 
         # provided already
         if not genes:
+            self.geneCount = 1
             # TODO: populate array
             self.genes = []
         else:
             self.genes = genes
 
+    def generateRandomGene(self):
+        amplitude = random.randint(1, self.maxAmplitude)
+        frequency = random.randint(self.minFrequency, self.maxFrequency)
+        function = random.choice(self.functions)
+        return {'amp': amplitude, 'freq': frequency, 'func': fucntion}
 
     def Recombine(self, dna):
         #TODO: handle times where the incoming dna is not the same length
