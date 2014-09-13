@@ -6,6 +6,7 @@ import scipy as sp
 import random
 
 class SoundDna:
+class SoundDna:
     
     # name parameters and initialize them
     # genes will be a list containing a dictionary of all the parameters for each individual
@@ -54,3 +55,13 @@ class SoundDna:
     def getDna(self):
 
         # return dna in a list format to be applied successively
+        return
+
+    def CalculateFitness(self, reference):
+        '''Calculates the fitness of the current organism based on the
+        waveform of the reference (also a SoundDna object). Fitness is
+        calculated by first normalizing the input sound and dividing the
+        waveform by that number. Then the average distance between the waveforms
+        across all frequencies will be calculated.'''
+
+        return
