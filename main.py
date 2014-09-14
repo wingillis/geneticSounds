@@ -25,9 +25,14 @@
 import argparse 
 import time, os, sys
 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
-
-
+import waveformHandler
+from dna import SoundDna
+import extraFunctions as util
+from population import Population
 
 ##################################################
 # Global variables
@@ -46,9 +51,12 @@ parser.add_argument('file', help='the input file for sound reference (.mp3 or .w
 # argument for the time span in the file
 parser.add_argument('-t', help='time span that the sound spans in music file')
 # optional argument for the number of generations for evolution
-parser.add_argument('-g', type=int, help='[OPTIONAL] amount of generations to evolve. Default is 1000.', default=1000)
+parser.add_argument('-g', type=int, 
+                    help='[OPTIONAL] amount of generations to evolve. Default is 1000.', 
+                    default=1000)
 # optional argument for the population size
-parser.add_argument('-p', type=int, default=500, help='[OPTIONAL] the population size of sound producers. Default is 500')
+parser.add_argument('-p', type=int, default=500, 
+                    help='[OPTIONAL] the population size of sound producers. Default is 500')
 
 
 args = parser.parse_args()
@@ -61,19 +69,39 @@ args = parser.parse_args()
 
 def main():
     '''This is the main function, where everything will be handled'''
+
+    print('Sound evolution beginning')    
+    
     generations = args.g
 
     populationSize = args.p
+    
+    wavHandler = waveformHandler.WaveformHandler()
+    
+    #TODO process the timing dicitonary needed for load file   
+    timeTuple = util.parseTimeArg(args.t)
+    timeSpan = abs(timeTuple[1] - timeTuple[0])
+    
+    # reference is a numpy array of waveform values and samplingRate is int
+    samplingRate, reference = wavHandler.loadFile(timeTuple, args.file)
 
     # array for holding the population
-    population = []
+    print('Populating first population')
+    population = Population(populationSize, timeSpan)
 
     for generation in range(generations):
-        print('Processing generation {0}'.format(generation))
+        print('Processing generation {0} of {1}'.format(generation, generations))
         print('Populating...')
-        # TODO: fill array with DNA containing creatures
-        tempGeneration = []
+        # Structure:
+        # calculate fitness of every organism
+        # sort list with highest fitness first
+        # highest fitness gets to breed disproportionately more than lower
+        # (exponential curve)
 
+        population.CalculateFitness()
+        
+        
+        
 # run the program!!
 if __name__=='__main__':
     main()

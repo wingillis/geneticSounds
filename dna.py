@@ -6,6 +6,8 @@ import random
 
 class SoundDna:
     
+    # a small number representing the rate of mutation
+    self.mutationRate = 1/100
     
     def __init__(self, time, samplingRate, genes=None):
         # TODO: figure out what parameters to add to init
@@ -36,6 +38,9 @@ class SoundDna:
         self.minFrequency = 10
         self.maxFrequency = 20000
         # functions that can be used to calculate a sound
+        
+        self.fitness = 0        
+        
         self.functions = [np.sin, np.cos]
         if not genes:
             self.geneCount = 1
@@ -56,15 +61,24 @@ class SoundDna:
         return # return a recombined set of dna
 
     def Mutate(self):
+        # TODO define a list of possible mutations that could happen
         
         # trying to stick to the functional programming paradigm
         # by always returning things from functions
         return #mutated dna
+        
+    def willMutate(self):
+        '''Returns true or false'''
+        return random.Random() < self.mutationRate
 
     def getDna(self):
         # TODO: figure the return format
         # return dna in a list format to be applied successively
         return
+        
+    def getFitness(self):
+        ''' returns the fitness if calculated, otherwise defaults to 0'''
+        return self.fitness
 
     def CalculateFitness(self, reference):
         '''Calculates the fitness of the current organism based on the
@@ -75,7 +89,7 @@ class SoundDna:
         
         #TODO figure out how to calculate the fitness
 
-        return
+        return True
         
     def produceSoundWaveform(self):
         ''' applies the periodic functions to the time period to produce

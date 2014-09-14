@@ -3,20 +3,39 @@
 # time lengths in imported files.
 # This file also handles saving the sound waveforms to a file
 
+# load modules
+
+import mp3towav, os
+import scipy.io.wavfile
+
+#import numpy as np
 class WaveformHandler():
 
-    def __init__(self):
-        pass
+    def loadFile(self, timing, fileName):
+        ''' loads a file and returns a tuple of the sampling rate
+        and the waveform numpy array.
+        Timing is a tuple containing start and stop times.
+        supports wav and mp3'''
+        
+        # there is no need to convert it to a wav because it already is
+        if fileName.endswith('.wav'):
+            output = scipy.io.wavfile.read(os.path.join('inputMusic', fileName))
+        else:
+            newPath = mp3towav.processMp3File(os.path.join('inputMusic', fileName), fileName, 'inputMusic')
+            output = scipy.io.wavfile.read(newPath)
+            
+        #TODO load only the time specified by start and stop options
+        # using the quality of the waveform in the audio
 
-    def loadFile(self, timing):
-        # loads file and returns it
-        # timing is a dictionary containing start and stop
-        pass
+        return output
 
-    def saveFile(self, output):
+    def saveFile(self, outputName, rate, waveform):
+        ''' Rate is in samples/sec. saves file to outputSound folder'''
         # this saves the file to the output destination
         # and returns true if it worked correctly
-
-        pass
+        
+        scipy.io.wavfile.write(os.path.join('outputSound', outputName), rate, waveform.astype('i2'))        
+        
+        return True
 
     

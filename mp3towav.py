@@ -4,7 +4,7 @@ def processMp3File(filePath, filename, outputPath=None):
     if filename.endswith('.mp3'):
         # execute code
 	# User defined location for ffmpeg
-        ffmpeg = r'C:\Users\wgillis\Downloads\ffmpeg-20140829-git-4c92047-win64-static\bin\ffmpeg.exe'
+        ffmpeg = r'C:\Users\wgillis\Downloads\ffmpeg\bin\ffmpeg.exe'
         linuxModule = 'avconv'
         import subprocess, os, sys
         if not outputPath:
